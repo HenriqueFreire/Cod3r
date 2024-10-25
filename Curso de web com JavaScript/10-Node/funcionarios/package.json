@@ -1,8 +1,10 @@
 {
   "name": "funcionarios",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "funcionarios.js",
   "scripts": {
+    "start": "node funcionarios.js",
+    "dev": "nodemon funcionarios.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
