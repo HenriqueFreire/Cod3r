@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagens</title>
+  <style>
+    .circular {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <img 
+    src="http://files.cod3r.com.br/curso-web/imagem1.jpg"
+    alt="Imagem 1"
+    width="300"
+    height="200"
+    title="Imagem 1 - Exemplo de Imagem">
+  </p>
+  <p>
+    <img 
+    src="http://files.cod3r.com.br/curso-web/imagem2.gif"
+    alt="Imagem 2"
+    width="300"
+    height="200"
+    title="Imagem 2 - Exemplo de Imagem">
+  </p>
+  <p class="circular">
+    <img 
+    src="http://files.cod3r.com.br/curso-web/imagem3.png"
+    alt="Imagem 3"
+    width="300"
+    height="200"
+    title="Imagem 3 - Exemplo de Imagem">
+  </p>
+  <p class="texto">
+    <img 
+    src="http://files.cod3r.com.br/curso-web/avatar.jpg"
+    align="left"
+    alt="Avatar"
+    width="300"
+    height="200"
+    title="Imagem 4 - Exemplo de Imagem">
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+    Eveniet iste cumque consequatur, doloremque quibusdam, 
+    veniam sunt error voluptatibus omnis ut eos, 
+    natus eum voluptates harum quas. Quo, officia. Cumque, hic!
+  </p>
+  <p>
+    <picture>
+      <source 
+      srcset="http://files.cod3r.com.br/curso-web/imagem1.jpg"
+      media="(min-width: 800px)">
+      <source 
+      srcset="http://files.cod3r.com.br/curso-web/imagem2.gif"
+      media="(min-width: 500px)">
+      <img 
+      src="http://files.cod3r.com.br/curso-web/imagem3.png"
+      alt="Imagem Responsiva"
+      width="300"
+      height="200"
+      title="Imagem Responsiva - Exemplo de Imagem">
+    </picture>
+  </p>
+</body>
+</html>

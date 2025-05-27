@@ -1,0 +1,51 @@
+<style>
+  #name,
+  #password,
+   textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+
+</style>
+
+<h1>Formulário</h1>
+<form method="post">
+  <input type="text" name="name" id="name" placeholder="Nome" required>
+  <input type="password" name="password" id="password" placeholder="Senha" required>
+  <textarea name="bio" id="bio" cols="30" rows="10" placeholder="Escreva algo sobre você..."></textarea>
+  <div>
+    <input type="radio" name="type" id="Admin" value="Admin"> Admin
+    <input type="radio" name="type" id="Regular" value="Regular" checked> Regular
+  </div>
+  <input type="checkbox" name="active" id="active" value="true"> Ativo
+  <select name="country" id="country">
+    <option value="BR">Brasil</option>
+    <option value="US">Estados Unidos</option>
+    <option value="FR">França</option>
+    <option value="ES">Espanha</option>
+  </select>
+  <select name="interests" id="interests" multiple>
+    <option value="Node.JS">Node.JS</option>
+    <option value="React">React</option>
+    <option value="Angular">Angular</option>
+    <option value="Vue">Vue</option>
+  </select>
+  <button action="http://localhost:3003/usuarios">Incluir</button>
+  <button action="http://localhost:3003/usuarios/3">Alterar</button>
+</form>

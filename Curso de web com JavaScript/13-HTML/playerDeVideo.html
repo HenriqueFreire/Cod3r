@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player de Vídeo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    video {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    input[type="range"] {
+      width: 150px;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" width="640" height="360" controlslist="nodownload">
+    <source src="http://files.cod3r.com.br/curso-web/video.mp4" type="video/mp4">
+    Seu navegador não suporta o vídeo.
+  </video>
+  <div class="controls">
+    <button id="play">&#9658; Play</button>
+    <button id="pause">&#10074;&#10074; Pause</button>
+    <input id="progress" type="range" min="0" max="100" value="0">
+    <label for="volume">Volume:</label>
+    <input id="volume" type="range" min="0" max="1" step="0.1" value="1">
+    <button id="fullscreen">&#x26F6; Tela cheia</button>
+  </div>
+  <script>
+    const video = document.getElementById('video');
+    const playButton = document.getElementById('play');
+    const pauseButton = document.getElementById('pause');
+    const progress = document.getElementById('progress');
+    const volume = document.getElementById('volume');
+    const fullscreenButton = document.getElementById('fullscreen');
+
+    // Play video
+    playButton.onclick = () => video.play();
+
+    // Pause video
+    pauseButton.onclick = () => video.pause();
+
+    // Update progress bar as video plays
+    video.ontimeupdate = () => {
+      progress.value = (video.currentTime / video.duration) * 100;
+    };
+
+    // Seek video
+    progress.oninput = (e) => {
+      video.currentTime = (e.target.value / 100) * video.duration;
+    };
+
+    // Adjust volume
+    volume.oninput = (e) => {
+      video.volume = e.target.value;
+    };
+
+    // Fullscreen mode
+    fullscreenButton.onclick = () => {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { // Safari
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // IE/Edge
+        video.msRequestFullscreen();
+      }
+    };
+  </script>
+</body>
+</html>

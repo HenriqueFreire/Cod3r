@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #conteudo {
+      border: 1px solid #ccc;
+      padding: 30px 0;
+    }
+    #teste{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Exercícios - HTML</h1>
+  </header>
+  <nav>
+    <a id="teste" url="teste.html">00 - Teste</a>
+  </nav>
+  <section id="conteudo"></section>
+  <footer>
+    <br>
+    <p>
+      Curso de web
+    </p>
+  </footer>
+  <script>
+
+    const testeLink = document.getElementById('teste');
+    testeLink.addEventListener('click', function(event) {
+      event.preventDefault(); // Evita o comportamento padrão do link
+      const url = this.getAttribute('url');
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('conteudo').innerHTML = html;
+        })
+        .catch(error => console.error('Erro ao carregar o conteúdo:', error));
+    });
+
+  </script>
+</body>
+</html>

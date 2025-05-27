@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Carousel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    .carousel {
+      width: 80%;
+      max-width: 600px;
+      overflow: hidden;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slides img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border: none;
+    }
+    .navigation {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .navigation button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .navigation button:hover {
+      background-color: #0056b3;
+    }
+    .indicators {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+    }
+    .indicators span {
+      width: 10px;
+      height: 10px;
+      background-color: #ddd;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .indicators span.active {
+      background-color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <div class="slides"></div>
+    <div class="indicators"></div>
+  </div>
+  <div class="navigation">
+    <button onclick="prevSlide()">Anterior</button>
+    <button onclick="nextSlide()">Próximo</button>
+  </div>
+
+  <script>
+    const images = [
+      { src: "http://files.cod3r.com.br/curso-web/imagem1.jpg", alt: "Parede de pedra - foto de Tasser" },
+      { src: "http://files.cod3r.com.br/curso-web/imagem2.gif", alt: "gif animado com o logo da Cod3r" },
+      { src: "http://files.cod3r.com.br/curso-web/imagem3.png", alt: "Foto da baía de Guanabara" }
+    ];
+
+    const slides = document.querySelector('.slides');
+    const indicatorsContainer = document.querySelector('.indicators');
+    let currentIndex = 0;
+
+    // Populate slides dynamically
+    images.forEach(image => {
+      const imgElement = document.createElement('img');
+      imgElement.src = image.src;
+      imgElement.alt = image.alt;
+      slides.appendChild(imgElement);
+    });
+
+    const totalSlides = images.length;
+
+    // Create indicators
+    for (let i = 0; i < totalSlides; i++) {
+      const indicator = document.createElement('span');
+      indicator.addEventListener('click', () => goToSlide(i));
+      indicatorsContainer.appendChild(indicator);
+    }
+    const indicators = document.querySelectorAll('.indicators span');
+
+    function updateSlidePosition() {
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      updateIndicators();
+    }
+
+    function updateIndicators() {
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlidePosition();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlidePosition();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateSlidePosition();
+    }
+
+    // Auto-slide functionality
+    setInterval(nextSlide, 3000);
+
+    // Initialize
+    updateSlidePosition();
+  </script>
+</body>
+</html>
