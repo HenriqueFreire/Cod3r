@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='UTF-8'>
+	<title>XMLHttpRequest #03</title>
+	<link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+	<h1>Estados</h1>
+
+	<script>
+		function ajax(config) {
+			const xhr = new XMLHttpRequest();
+			
+			xhr.open(config.method, config.url, true);
+			xhr.onreadystatechange = error => {
+				if (xhr.readyState === 4) {
+					if (xhr.status >= 200 && xhr.status < 300) {
+						config.success(xhr.responseXML);
+					} else {
+						config.error(xhr.status, xhr.statusText);
+					};
+				};
+			};
+
+			xhr.send();
+		};
+
+		ajax({
+			method: 'GET',
+			url: '/dados/estados.xml',
+			success: response => {
+				const estados = response.getElementsByTagName('estado');
+				const itens = Array.from(estados).reduce((html, estado) => {
+					return html + `<li>${estado.attributes.nome.value} - ${estado.attributes.sigla.value}</li>`;
+				}, '');
+
+				document.body.insertAdjacentHTML('beforeend', `<ul>${itens}</ul>`);
+			},
+			error: error => {
+				const msg = document.createTextNode(`${error.code}: ${error.statusText}`);
+				document.body.appendChild(msg);
+			}
+		});
+	</script>
+</body>
